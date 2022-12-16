@@ -1,0 +1,19 @@
+services:
+  dotnet:
+    build: .
+    ports:
+      - "5001:80"
+      - "5002:443"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: 5002
+      # ASPNETCORE_Kestrel__Certificates__Default__Password: SecurePwdGoesHere
+      # ASPNETCORE_Kestrel__Certificates__Default__Path: /root/.aspnet/https/aspnetapp.pfx
+    volumes:
+      - type: bind
+        source: ~/.aspnet/https/aspnetapp.pfx
+        target: /root/.aspnet/https/aspnetapp.pfx
+      - type: bind
+        source: ./API/Properties
+        target: /app/Properties
